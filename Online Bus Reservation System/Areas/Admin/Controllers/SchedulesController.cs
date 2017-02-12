@@ -6,13 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Online_Bus_Reservation_System.Areas.Admin.Models;
+using Online_Bus_Reservation_System.Models;
 
 namespace Online_Bus_Reservation_System.Areas.Admin.Controllers
 {
     public class SchedulesController : Controller
     {
-        private Online_Bus_Ticketing_SystemEntities1 db = new Online_Bus_Ticketing_SystemEntities1();
+        private Online_Bus_Ticketing_SystemEntities db = new Online_Bus_Ticketing_SystemEntities();
 
         // GET: Admin/Schedules
         public ActionResult Index()

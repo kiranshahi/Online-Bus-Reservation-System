@@ -7,26 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Online_Bus_Reservation_System.Areas.Admin.Models
+namespace Online_Bus_Reservation_System.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class City
+    public partial class Bus
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public City()
+        public Bus()
         {
-            this.Routes = new HashSet<Route>();
-            this.Routes1 = new HashSet<Route>();
+            this.Schedules = new HashSet<Schedule>();
         }
     
-        public int CitiesId { get; set; }
-        public string CityName { get; set; }
+        public int BusNo { get; set; }
+        public int BusType { get; set; }
     
+        public virtual BusType BusType1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Route> Routes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Route> Routes1 { get; set; }
+        public virtual ICollection<Schedule> Schedules { get; set; }
     }
 }

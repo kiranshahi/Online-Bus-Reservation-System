@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Online_Bus_Reservation_System.Areas.Admin.Models
+namespace Online_Bus_Reservation_System.Models
 {
     using System;
     using System.Collections.Generic;

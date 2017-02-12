@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OnlineBusTicketingSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bus">
           <Key>
             <PropertyRef Name="BusNo" />
@@ -119,7 +119,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="OnlineBusTicketingSystemModelStoreContainer">
+        <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BusType" EntityType="Self.BusType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
@@ -154,7 +154,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="OnlineBusTicketingSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Bus">
           <Key>
             <PropertyRef Name="BusNo" />
@@ -281,7 +281,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Online_Bus_Ticketing_SystemEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Online_Bus_Ticketing_SystemEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Buses" EntityType="Self.Bus" />
           <EntitySet Name="BusTypes" EntityType="Self.BusType" />
           <EntitySet Name="Cities" EntityType="Self.City" />
@@ -317,9 +317,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="OnlineBusTicketingSystemModelStoreContainer" CdmEntityContainer="Online_Bus_Ticketing_SystemEntities1">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Online_Bus_Ticketing_SystemEntities">
           <EntitySetMapping Name="Buses">
-            <EntityTypeMapping TypeName="OnlineBusTicketingSystemModel.Bus">
+            <EntityTypeMapping TypeName="Model.Bus">
               <MappingFragment StoreEntitySet="Bus">
                 <ScalarProperty Name="BusNo" ColumnName="BusNo" />
                 <ScalarProperty Name="BusType" ColumnName="BusType" />
@@ -327,7 +327,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BusTypes">
-            <EntityTypeMapping TypeName="OnlineBusTicketingSystemModel.BusType">
+            <EntityTypeMapping TypeName="Model.BusType">
               <MappingFragment StoreEntitySet="BusType">
                 <ScalarProperty Name="TypeId" ColumnName="TypeId" />
                 <ScalarProperty Name="TotalSeat" ColumnName="TotalSeat" />
@@ -336,7 +336,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cities">
-            <EntityTypeMapping TypeName="OnlineBusTicketingSystemModel.City">
+            <EntityTypeMapping TypeName="Model.City">
               <MappingFragment StoreEntitySet="Cities">
                 <ScalarProperty Name="CitiesId" ColumnName="CitiesId" />
                 <ScalarProperty Name="CityName" ColumnName="CityName" />
@@ -344,7 +344,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Routes">
-            <EntityTypeMapping TypeName="OnlineBusTicketingSystemModel.Route">
+            <EntityTypeMapping TypeName="Model.Route">
               <MappingFragment StoreEntitySet="Route">
                 <ScalarProperty Name="RouteId" ColumnName="RouteId" />
                 <ScalarProperty Name="CityFrom" ColumnName="CityFrom" />
@@ -354,7 +354,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Schedules">
-            <EntityTypeMapping TypeName="OnlineBusTicketingSystemModel.Schedule">
+            <EntityTypeMapping TypeName="Model.Schedule">
               <MappingFragment StoreEntitySet="Schedule">
                 <ScalarProperty Name="ScheduleId" ColumnName="ScheduleId" />
                 <ScalarProperty Name="TravelDate" ColumnName="TravelDate" />

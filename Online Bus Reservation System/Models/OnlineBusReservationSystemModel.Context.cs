@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Online_Bus_Reservation_System.Areas.Admin.Models
+namespace Online_Bus_Reservation_System.Models
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Online_Bus_Ticketing_SystemEntities1 : DbContext
+    public partial class Online_Bus_Ticketing_SystemEntities : DbContext
     {
-        public Online_Bus_Ticketing_SystemEntities1()
-            : base("name=Online_Bus_Ticketing_SystemEntities1")
+        public Online_Bus_Ticketing_SystemEntities()
+            : base("name=Online_Bus_Ticketing_SystemEntities")
         {
         }
     

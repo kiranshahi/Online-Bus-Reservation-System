@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Kiran Shahi\Documents\Visual Studio 2015\Projects\Online-Bus-Reservation-System-master\Online Bus Reservation System\Areas\Admin\Models\OnlineBusTicketinSystem.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Kiran Shahi\Documents\Visual Studio 2015\Projects\Online-Bus-Reservation-System-master\Online Bus Reservation System\Models\OnlineBusReservationSystemModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

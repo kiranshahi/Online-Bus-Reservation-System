@@ -6,13 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Online_Bus_Reservation_System.Areas.Admin.Models;
+using Online_Bus_Reservation_System.Models;
 
 namespace Online_Bus_Reservation_System.Areas.Admin.Controllers
 {
     public class BusesController : Controller
     {
-        private Online_Bus_Ticketing_SystemEntities1 db = new Online_Bus_Ticketing_SystemEntities1();
+        private Online_Bus_Ticketing_SystemEntities db = new Online_Bus_Ticketing_SystemEntities();
 
         // GET: Admin/Buses
         public ActionResult Index()
@@ -52,6 +52,7 @@ namespace Online_Bus_Reservation_System.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+               // User.Identity.Name
                 db.Buses.Add(bus);
                 db.SaveChanges();
                 return RedirectToAction("Index");
