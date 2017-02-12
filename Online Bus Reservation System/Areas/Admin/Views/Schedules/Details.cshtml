@@ -1,0 +1,58 @@
+﻿@model Online_Bus_Reservation_System.Areas.Admin.Models.Schedule
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Schedule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TravelDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TravelDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivalTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrivalTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bus1.BusNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bus1.BusNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Route1.RouteId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Route1.RouteId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ScheduleId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

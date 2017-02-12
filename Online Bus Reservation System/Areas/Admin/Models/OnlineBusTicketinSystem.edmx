@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OnlineBusTicketingSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="BusNo" />
+          </Key>
+          <Property Name="BusNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BusType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BusType">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TotalSeat" Type="int" Nullable="false" />
+          <Property Name="AC" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="CitiesId" />
+          </Key>
+          <Property Name="CitiesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="RouteId" />
+          </Key>
+          <Property Name="RouteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityFrom" Type="int" Nullable="false" />
+          <Property Name="CityTo" Type="int" Nullable="false" />
+          <Property Name="Fare" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="ScheduleId" />
+          </Key>
+          <Property Name="ScheduleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TravelDate" Type="date" Nullable="false" />
+          <Property Name="DepartureTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="ArrivalTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Route" Type="int" Nullable="false" />
+          <Property Name="Bus" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Bus_BusType">
+          <End Role="BusType" Type="Self.BusType" Multiplicity="1" />
+          <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusType">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="Bus">
+              <PropertyRef Name="BusType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_CitiesFrom">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="CitiesId" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="CityFrom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_CitiesTo">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="CitiesId" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="CityTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_Route">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="Route1" Type="Self.Route" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="RouteId" />
+            </Principal>
+            <Dependent Role="Route1">
+              <PropertyRef Name="RouteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Bus">
+          <End Role="Bus" Type="Self.Bus" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bus">
+              <PropertyRef Name="BusNo" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Route">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="RouteId" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="Route" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnlineBusTicketingSystemModelStoreContainer">
+          <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BusType" EntityType="Self.BusType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Route" EntityType="Self.Route" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Bus_BusType" Association="Self.FK_Bus_BusType">
+            <End Role="BusType" EntitySet="BusType" />
+            <End Role="Bus" EntitySet="Bus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_CitiesFrom" Association="Self.FK_Route_CitiesFrom">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_CitiesTo" Association="Self.FK_Route_CitiesTo">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_Route" Association="Self.FK_Route_Route">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="Route1" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Bus" Association="Self.FK_Schedule_Bus">
+            <End Role="Bus" EntitySet="Bus" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Route" Association="Self.FK_Schedule_Route">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OnlineBusTicketingSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="BusNo" />
+          </Key>
+          <Property Name="BusNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BusType1" Relationship="Self.FK_Bus_BusType" FromRole="Bus" ToRole="BusType" />
+          <NavigationProperty Name="Schedules" Relationship="Self.FK_Schedule_Bus" FromRole="Bus" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="BusType">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TotalSeat" Type="Int32" Nullable="false" />
+          <Property Name="AC" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Buses" Relationship="Self.FK_Bus_BusType" FromRole="BusType" ToRole="Bus" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CitiesId" />
+          </Key>
+          <Property Name="CitiesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Routes" Relationship="Self.FK_Route_CitiesFrom" FromRole="Cities" ToRole="Route" />
+          <NavigationProperty Name="Routes1" Relationship="Self.FK_Route_CitiesTo" FromRole="Cities" ToRole="Route" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="RouteId" />
+          </Key>
+          <Property Name="RouteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityFrom" Type="Int32" Nullable="false" />
+          <Property Name="CityTo" Type="Int32" Nullable="false" />
+          <Property Name="Fare" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Route_CitiesFrom" FromRole="Route" ToRole="Cities" />
+          <NavigationProperty Name="City1" Relationship="Self.FK_Route_CitiesTo" FromRole="Route" ToRole="Cities" />
+          <NavigationProperty Name="Route1" Relationship="Self.FK_Route_Route" FromRole="Route" ToRole="Route1" />
+          <NavigationProperty Name="Route2" Relationship="Self.FK_Route_Route" FromRole="Route1" ToRole="Route" />
+          <NavigationProperty Name="Schedules" Relationship="Self.FK_Schedule_Route" FromRole="Route" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="ScheduleId" />
+          </Key>
+          <Property Name="ScheduleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TravelDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DepartureTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="ArrivalTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Route" Type="Int32" Nullable="false" />
+          <Property Name="Bus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bus1" Relationship="Self.FK_Schedule_Bus" FromRole="Schedule" ToRole="Bus" />
+          <NavigationProperty Name="Route1" Relationship="Self.FK_Schedule_Route" FromRole="Schedule" ToRole="Route" />
+        </EntityType>
+        <Association Name="FK_Bus_BusType">
+          <End Role="BusType" Type="Self.BusType" Multiplicity="1" />
+          <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusType">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="Bus">
+              <PropertyRef Name="BusType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Bus">
+          <End Role="Bus" Type="Self.Bus" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bus">
+              <PropertyRef Name="BusNo" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_CitiesFrom">
+          <End Role="Cities" Type="Self.City" Multiplicity="1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="CitiesId" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="CityFrom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_CitiesTo">
+          <End Role="Cities" Type="Self.City" Multiplicity="1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="CitiesId" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="CityTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_Route">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="Route1" Type="Self.Route" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="RouteId" />
+            </Principal>
+            <Dependent Role="Route1">
+              <PropertyRef Name="RouteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Route">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="RouteId" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="Route" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Online_Bus_Ticketing_SystemEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Buses" EntityType="Self.Bus" />
+          <EntitySet Name="BusTypes" EntityType="Self.BusType" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Routes" EntityType="Self.Route" />
+          <EntitySet Name="Schedules" EntityType="Self.Schedule" />
+          <AssociationSet Name="FK_Bus_BusType" Association="Self.FK_Bus_BusType">
+            <End Role="BusType" EntitySet="BusTypes" />
+            <End Role="Bus" EntitySet="Buses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Bus" Association="Self.FK_Schedule_Bus">
+            <End Role="Bus" EntitySet="Buses" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_CitiesFrom" Association="Self.FK_Route_CitiesFrom">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Route" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_CitiesTo" Association="Self.FK_Route_CitiesTo">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Route" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_Route" Association="Self.FK_Route_Route">
+            <End Role="Route" EntitySet="Routes" />
+            <End Role="Route1" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Route" Association="Self.FK_Schedule_Route">
+            <End Role="Route" EntitySet="Routes" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OnlineBusTicketingSystemModelStoreContainer" CdmEntityContainer="Online_Bus_Ticketing_SystemEntities1">
+          <EntitySetMapping Name="Buses">
+            <EntityTypeMapping TypeName="OnlineBusTicketingSystemModel.Bus">
+              <MappingFragment StoreEntitySet="Bus">
+                <ScalarProperty Name="BusNo" ColumnName="BusNo" />
+                <ScalarProperty Name="BusType" ColumnName="BusType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusTypes">
+            <EntityTypeMapping TypeName="OnlineBusTicketingSystemModel.BusType">
+              <MappingFragment StoreEntitySet="BusType">
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="TotalSeat" ColumnName="TotalSeat" />
+                <ScalarProperty Name="AC" ColumnName="AC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="OnlineBusTicketingSystemModel.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="CitiesId" ColumnName="CitiesId" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Routes">
+            <EntityTypeMapping TypeName="OnlineBusTicketingSystemModel.Route">
+              <MappingFragment StoreEntitySet="Route">
+                <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+                <ScalarProperty Name="CityFrom" ColumnName="CityFrom" />
+                <ScalarProperty Name="CityTo" ColumnName="CityTo" />
+                <ScalarProperty Name="Fare" ColumnName="Fare" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="OnlineBusTicketingSystemModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="ScheduleId" ColumnName="ScheduleId" />
+                <ScalarProperty Name="TravelDate" ColumnName="TravelDate" />
+                <ScalarProperty Name="DepartureTime" ColumnName="DepartureTime" />
+                <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
+                <ScalarProperty Name="Route" ColumnName="Route" />
+                <ScalarProperty Name="Bus" ColumnName="Bus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

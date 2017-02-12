@@ -1,0 +1,26 @@
+﻿@model Online_Bus_Reservation_System.Areas.Admin.Models.Bus
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Bus</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BusType1.TypeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusType1.TypeId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BusNo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
